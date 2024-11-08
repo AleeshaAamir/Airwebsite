@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM3U2kq9t4V4F6xRz4c4B6sWv3A1b5l4NQkNm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1030; 
+            background-color: rgba(24, 42, 75, 0.8); 
+        }
+        .second-navbar {
+            position: sticky;
+            top: 60px; 
+            z-index: 1020; 
+            background-color: transparent; 
+            transition: background-color 0.3s, color 0.3s; 
+            color: white; 
+        }
+        .second-navbar.scrolled {
+            background-color: black;
+            color: white; 
+        }
+        .navbar-brand {
+            font-size: 2rem; 
+            font-weight: bold; 
+            color: #fff; 
+        }
+        .navbar-nav .nav-link {
+            font-size: 1.25rem;
+            font-family: 'Arial', sans-serif;
+            color: white; 
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffc107; 
+        }
+        .university-image {
+            width: 100vw; 
+            height: 100vh; 
+            object-fit: cover; 
+            z-index: -1; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+        }
+        .content {
+            position: relative; 
+            z-index: 1; 
+            padding-top: 100vh; 
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            color: #fff; 
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); 
+        }
+        .section:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.5); 
+            color: #000; 
+        }
+        .learn-button {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%; 
+            z-index: 2;
+            font-size: 1.5rem; 
+            padding: 15px; 
+            background-color: rgba(24, 42, 75, 0.8); 
+            border-radius: 5px; 
+            transition: opacity 0.3s; 
+        }
+        .learn-button.hidden {
+            opacity: 0; 
+            pointer-events: none;
+        }
+        .card {
+            transition: transform 0.2s; 
+            height: 250px; 
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card-img-top {
+            height: 150px; 
+            object-fit: cover; 
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column; 
+            justify-content: space-between; 
+        }
+        #research {
+            text-align: center; 
+            color: black; 
+            padding: 20px; 
+        }
+
+        #research img {
+            width: auto; 
+            height: auto; 
+            max-height: auto; 
+            object-fit: cover; 
+        }
+        .learn-more-section p {
+    font-size: 1.5rem; 
+    line-height: 1.6; 
+}
+.section {
+            padding: 40px 20px;
+            background-color: white;
+            color: black;
+            position: relative; 
+        }
+
+        .social-icons {
+            position: absolute;
+            top: 20px; 
+            right: 20px; 
+        }
+
+        .icon {
+            color: #000; 
+            font-size: 1.5rem; 
+            margin-left: 15px; 
+            transition: color 0.3s; 
+        }
+
+        .icon:hover {
+            color: #007bff;
+        }
+
+        .hover-effect {
+            cursor: pointer;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        .hover-effect:hover {
+            color: #007bff(57,109,2);
+            text-decoration: underline;
+        }
+
+        .list-item {
+            cursor: pointer;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        .list-item:hover {
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .footer {
+            background-color: rgba(24, 42, 75, 0.8); 
+            color: white; 
+            padding: 30px 20px; 
+            position: relative;
+            font-size: 1.2rem; 
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer .footer-left {
+            font-weight: bold;
+        }
+
+        .footer a {
+            color: white; 
+            margin-left: 20px; 
+            text-decoration: none; 
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #ffd700; 
+        }
+        .program-image {
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+        }
+    </style>
+    <title>Air University - Single Page</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <h1 class="navbar-brand">Air University</h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#societal-mission">Societal Mission</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#students">Students</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#faculty & staff">Faculty & Staff</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#families">Families</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#visitors">Visitors</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#alumni">Alumni</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <button class="btn btn-secondary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg second-navbar">
+    <div class="container-fluid justify-content-center">
+        <ul class="navbar-nav">
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#news">News</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#academic">Academic</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#research">Research</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#events">Events</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#health-care">Health Care</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#campus-life">Campus Life</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<img src="https://portals.au.edu.pk/ICO/Content/images/banner.jpg" alt="Air University" class="university-image">
+<a href="#societal-mission" class="btn btn-primary btn-lg learn-button">Learn About Our Societal Mission</a>
+
+<div class="content">
+    <div id="societal-mission" class="section" style="background-color: white; color: black;">
+        <h2>Societal Mission</h2>
+        <p>Our societal mission is to contribute positively to the community and foster an environment that encourages sustainable development. We aim to:</p>
+        <ul>
+            <li>Promote education and lifelong learning.</li>
+            <li>Encourage community engagement and involvement.</li>
+            <li>Support local initiatives that enhance social welfare.</li>
+            <li>Foster partnerships with organizations that share our values.</li>
+            <li>Conduct research that addresses societal challenges.</li>
+        </ul>
+        <p>By aligning our academic pursuits with the needs of society, we strive to make a meaningful impact and empower individuals to create a better future.</p>
+        <button style="background-color: rgba(24, 42, 75, 0.8); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px;">
+            Learn More
+        </button>
+    </div>
+    </div>
+
+    <div id="news" class="section" style="background-color: white; color: black;">
+        <h2>Campus News</h2>
+        <p>Stay informed with the latest happenings at our university! Our campus is a vibrant hub of activity, featuring a variety of events, workshops, and initiatives that enrich the student experience.</p>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D22AQEmektG2VDKcg/feedshare-shrink_800/feedshare-shrink_800/0/1707922707787?e=2147483647&v=beta&t=zOFXdBP41N_1yR9adj2ciRRSQZRMV6Pgp1FsZsnyc7U" alt="Digital Marketing Workshop" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Digital Marketing Workshop</h5>
+                            <p class="card-text">Our recent workshop on digital marketing helped students gain vital skills.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://au.edu.pk/Pages/NewsEvents/EventGallary/24_2.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Annual Award Ceremony</h5>
+                            <p class="card-text">The Annual Award Ceremony event held to honor the outstanding achievements of our gold medalists.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://live.staticflickr.com/65535/50924873058_78c7195b1b_z.jpg" alt="Cultural Festival" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Excellence Ceremony</h5>
+                            <p class="card-text">The Excellence Ceremony is celebrating the outstanding achievements of students, faculty, and staff </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://au.edu.pk/Pages/NewsEvents/EventGallary/76_7.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Cultural Festival</h5>
+                            <p class="card-text">The annual cultural festival celebrated diversity with performances in our university.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.au.edu.pk/AU_New_Assets/images/blog/FOHS3.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Annual Science Fair</h5>
+                            <p class="card-text">The annual science fair showcased innovative projects from our students.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.au.edu.pk/pages/Plainning_and_Development/Pics/SC_Nowshera_11.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Opening Ceremony</h5>
+                            <p class="card-text">The Opening Ceremony marks the beginning of a new academic year </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button style="background-color: rgba(24, 42, 75, 0.8); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px;">
+            Learn More
+        </button>
+    </div>
+
+       
+
+    <div id="research" class="section" style="background-color: white; color: black;">
+        <h2>Research</h2>
+        <p>Driving discoveries vital to our world, our health, and our intellectual life</p>
+        <img src="https://www.columbia.edu/content/sites/default/files/styles/cu_crop/public/content/Research/machine-learning.jpeg?itok=vQ1uIfP9" alt="Contact Us">
+    </div>
+
+  
+    <div id="events" class="section" style="background-color: white; color: black;">
+        <h2>Events</h2>
+        <p>Our university hosts a variety of exciting events throughout the academic year</p>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://isra.edu.pk/wp-content/uploads/2024/04/433876377_745157177643773_2507394226922872151_n.jpg">
+                        <div class="card-body">
+                            <h5 class="card-title">Welcome Party</h5>
+                            <p class="card-text">In parties students will have the chance to meet faculty members, staff, and fellow students in a relaxed and friendly environment. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://au.edu.pk/Pages/NewsEvents/EventGallary/76_8.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Seminar AU</h5>
+                            <p class="card-text">seminar at AU that promises to enrich your academic experience and expand your knowledge on relevant topics in your field of study.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://live.staticflickr.com/65535/50924873058_78c7195b1b_z.jpg" alt="Cultural Festival" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Excellence Ceremony</h5>
+                            <p class="card-text">The Excellence Ceremony is celebrating the outstanding achievements of students, faculty, and staff </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://au.edu.pk/Pages/NewsEvents/EventGallary/76_7.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Cultural Festival</h5>
+                            <p class="card-text">The annual cultural festival celebrated diversity with performances in our university.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.au.edu.pk/AU_New_Assets/images/blog/FOHS3.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Annual Science Fair</h5>
+                            <p class="card-text">The annual science fair showcased innovative projects from our students.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.au.edu.pk/pages/Plainning_and_Development/Pics/SC_Nowshera_11.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Opening Ceremony</h5>
+                            <p class="card-text">The Opening Ceremony marks the beginning of a new academic year </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button style="background-color: rgba(24, 42, 75, 0.8); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px;">
+            Learn More
+        </button>
+    </div>
+
+        
+
+   
+        
+    <div id="academic" class="section" style="background-color: white; color: black;">
+        <h2>Academics</h2>
+        <p>Explore our academic programs and offerings.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <img src="https://aack.au.edu.pk/AU_Assets/HomeImages/Prime%20Minister%27s%20Youth%20Laptop%20Scheme%202023.png" alt="Academic Program 1" class="img-fluid program-image">
+                    <h5>High Achievers</h5>
+                    <p>At our university, we take immense pride in recognizing the accomplishments of our high achievers—students who excel academically and contribute positively to our community. These individuals not only achieve outstanding grades but also demonstrate leadership, initiative, and a commitment to excellence.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="https://www.au.edu.pk/pages/Faculties/AUSOM/Department/AUSOM/DMS/Event_Gallery/AUTAS_6.jpg" alt="Academic Program 2" class="img-fluid program-image">
+                    <h5>Data Fest Winners</h5>
+                    <p>The Data Fest is a thrilling event that showcases the incredible talent and innovative ideas of our students in the field of data science and analytics. Each year, participants compete in various challenges that test their skills in data analysis, visualization, and machine learning, culminating in a celebration of excellence.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="https://www.au.edu.pk/pages/Faculties/Computing_AI/Cyber_Security/Assets/Lab4.jpg" alt="Academic Program 3" class="img-fluid program-image">
+                    <h5>Final Papers</h5>
+                    <p>Final papers are not just a requirement; they are an opportunity for students to demonstrate their understanding of course material, engage with relevant literature, and contribute original ideas to their field of study. These papers often serve as valuable learning experiences that prepare students for future academic and endeavors.</p>
+                </div>
+            </div>
+        </div>
+        <button style="background-color: rgba(24, 42, 75, 0.8); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px;">
+            Learn More
+        </button>
+    </div>
+
+
+    <div id="campus-life" class="section" style="background-color: white; color: black;">
+        <h2>Campus Life</h2>
+        <p>Stay informed with the latest happenings at our university! Our campus is a vibrant hub of activity, featuring a variety of events, workshops, and initiatives that enrich the student experience.</p>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://aumc.edu.pk/files/newcampusaumc16.webp" alt="Digital Marketing Workshop" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Students Groups</h5>
+                            <p class="card-text">These groups focus on enhancing academic knowledge and providing networking opportunities within specific fields.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.au.edu.pk/AU_New_Assets/images/blog/8.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Group Study</h5>
+                            <p class="card-text">These groups provide opportunities for students to connect, collaborate, and engage in activities that align with their interests</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.au.edu.pk/Pages/NewsEvents/EventGallary/101_15.jpg" alt="Cultural Festival" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Extra curricular Activities</h5>
+                            <p class="card-text">Extracurricular activities play a vital role in enhancing the overall university experience. They provide students to develop skills </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="health-care" class="section" style="background-color: white; color: black;">
+        <h2>Health Care</h2>
+        <p>Clinical care, research, and education fuel innovation to advance human health.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <img src="https://nursesgroup.co.uk/assets/images/blog/healthcare-technology.jpg" alt="Academic Program 1" class="img-fluid program-image">
+                    <h5>Air Health Care</h5>
+                    <p>Air Medicine delivers unparalleled care for each patient’s unique needs. Our multidisciplinary approach to health care for the best possible outcomes.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/WORKPLACEV9CMS/2bgqjhmw_0iifqf_p8twtq.jpg" alt="Academic Program 3" class="img-fluid program-image">
+                    <h5>Children’s Health</h5>
+                    <p>Stanford Children’s Health is the only health care network in the Bay Area – and one of the few in the country – exclusively dedicated to pediatric and obstetric care.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="https://www.philips.com/c-dam/corporate/innovation-and-you/global/jun-2024/bridging-gaps-in-healthcare-hero.jpg" alt="Academic Program 1" class="img-fluid program-image">
+                    <h5>Elder's Health Care</h5>
+                    <p>Air Elders's Health is the only health care network in the Bay Area – and one of the few in the country – exclusively dedicated to pediatric and obstetric care.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="https://www.opentext.com/assets/images/products-solutions/solution-industry-category/opentext-image-ov-healthcare-en.jpg" alt="Academic Program 3" class="img-fluid program-image">
+                    <h5>Medicines</h5>
+                    <p>Medicine Moms’ and babies’ medical data predicts prematurity complications</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="https://www.cato.org/sites/cato.org/files/styles/optimized/public/2021-01/GettyImages-1139851278.jpg?itok=VtCs0qNw" alt="Academic Program 1" class="img-fluid program-image">
+                    <h5>Medicines pitfalls</h5>
+                    <p>Potential and pitfalls of smart toilets: Would you use one?</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="https://burst.shopifycdn.com/photos/doctor-reaches-towards-shelf.jpg?width=1000&format=pjpg&exif=0&iptc=0" alt="Academic Program 1" class="img-fluid program-image">
+                    <h5>Ointments</h5>
+                    <p>Commonly used in medicine and skincare to deliver active ingredients to affected area.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+        
+    </div>
+    <div id="learn-more" class="section learn-more-section" style="background-color: white; color: black;">
+        <h2>Learn More</h2>
+        <p>Air University (AU) is a prestigious institution located in Islamabad, Pakistan, known for its commitment to academic excellence, research, and professional development. Established in 2002, the university aims to provide a comprehensive education that prepares students for the challenges of the modern world.Engineering: Programs in Electrical, Mechanical, Civil, and Software Engineering.
+            Computer Science: Degrees focusing on Software Development, Data Science, and Cybersecurity.
+            Business Administration: Courses in Management, Finance, Marketing, and Entrepreneurship.
+            Social Sciences: Programs in Psychology, Sociology, and International Relations.
+            Natural Sciences: Degrees in Physics, Mathematics, and Environmental Science.</p>
+            <button style="background-color: rgba(24, 42, 75, 0.8); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px;">
+                Learn More
+            </button>
+    </div>
+    <div id="about-us" class="section">
+        <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank" class="icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank" class="icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com" target="_blank" class="icon"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.youtube.com" target="_blank" class="icon"><i class="fab fa-youtube"></i></a>
+        </div>
+        <h2>About Us</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h3 class="hover-effect">Schools</h3>
+                    <ul>
+                        <li class="list-item">School of Engineering</li>
+                        <li class="list-item">School of Business</li>
+                        <li class="list-item">School of Arts</li>
+                        <li class="list-item">School of Health Sciences</li>
+                        <li class="list-item">School of Education</li>
+                        <li class="list-item">School of Social Sciences</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h3 class="hover-effect">Academic</h3>
+                    <ul>
+                        <li class="list-item">Bachelor's Programs</li>
+                        <li class="list-item">Master's Programs</li>
+                        <li class="list-item">PhD Programs</li>
+                        <li class="list-item">Online Courses</li>
+                        <li class="list-item">Continuing Education</li>
+                        <li class="list-item">Internship Opportunities</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h3 class="hover-effect">Health Care</h3>
+                    <ul>
+                        <li class="list-item">Campus Health Services</li>
+                        <li class="list-item">Mental Health Resources</li>
+                        <li class="list-item">Health Education Programs</li>
+                        <li class="list-item">Emergency Services</li>
+                        <li class="list-item">Wellness Workshops</li>
+                        <li class="list-item">Health Insurance Information</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h3 class="hover-effect">About Air</h3>
+                    <ul>
+                        <li class="list-item">History of Air University</li>
+                        <li class="list-item">Mission and Vision</li>
+                        <li class="list-item">Leadership Team</li>
+                        <li class="list-item">Campus Locations</li>
+                        <li class="list-item">Accreditations</li>
+                        <li class="list-item">Community Engagement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-left">
+                <span>Air University</span>
+            </div>
+            <div class="footer-right">
+                <span>Emergency Number: 123-456-7890</span><br>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+   
+    window.addEventListener('scroll', function() {
+        const secondNavbar = document.querySelector('.second-navbar');
+        const learnButton = document.querySelector('.learn-button');
+        if (window.scrollY > 0) {
+            secondNavbar.classList.add('scrolled');
+            learnButton.classList.add('hidden'); 
+        } else {
+            secondNavbar.classList.remove('scrolled');
+            learnButton.classList.remove('hidden'); 
+        }
+    });
+</script>
+</body>
+</html>
