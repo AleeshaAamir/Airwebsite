@@ -1,32 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Students</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM3U2kq9t4V4F6xRz4c4B6sWv3A1b5l4NQkNm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1030; 
+            background-color: rgba(24, 42, 75, 0.8); 
+        }
+        .second-navbar {
+            position: sticky;
+            top: 60px; 
+            z-index: 1020; 
+            background-color: transparent; 
+            transition: background-color 0.3s, color 0.3s; 
+            color: white; 
+        }
+        .second-navbar.scrolled {
+            background-color: black;
+            color: white; 
+        }
+        .navbar-brand {
+            font-size: 2rem; 
+            font-weight: bold; 
+            color: #fff; 
+        }
+        .navbar-nav .nav-link {
+            font-size: 1.25rem;
+            font-family: 'Arial', sans-serif;
+            color: white; 
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffc107; 
+        }
+        .university-image {
+            width: 100vw; 
+            height: 100vh; 
+            object-fit: cover; 
+            z-index: -1; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+        }
+        .content {
+            position: relative; 
+            z-index: 1; 
+            padding-top: 100vh; 
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            color: #fff; 
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); 
+        }
+        .section:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.5); 
+            color: #000; 
+        }
+        .learn-button {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%; 
+            z-index: 2;
+            font-size: 1.5rem; 
+            padding: 15px; 
+            background-color: rgba(24, 42, 75, 0.8); 
+            border-radius: 5px; 
+           
+        }
+        .learn-button.hidden {
+            opacity: 0; 
+            pointer-events: none;
+        }
+        .learn-button:hover {
+      color: rgba(88, 92, 99, 0.8);
+    cursor: pointer; 
+}
+        .card {
+            transition: transform 0.2s; 
+            height: 250px; 
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card-img-top {
+            height: 150px; 
+            object-fit: cover; 
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column; 
+            justify-content: space-between; 
+        }
+        #research {
+            text-align: center; 
+            color: black; 
+            padding: 20px; 
+        }
+
+        #research img {
+            width: auto; 
+            height: auto; 
+            max-height: auto; 
+            object-fit: cover; 
+        }
+        .learn-more-section p {
+    font-size: 1.5rem; 
+    line-height: 1.6; 
+}
+.section {
+            padding: 40px 20px;
+            background-color: white;
+            color: black;
+            position: relative; 
+        }
+
+        .social-icons {
+            position: absolute;
+            top: 20px; 
+            right: 20px; 
+        }
+
+        .icon {
+            color: #000; 
+            font-size: 1.5rem; 
+            margin-left: 15px; 
+            transition: color 0.3s; 
+        }
+
+        .icon:hover {
+            color: #007bff;
+        }
+
+        .hover-effect {
+            cursor: pointer;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        .hover-effect:hover {
+            color: #007bff(57,109,2);
+            text-decoration: underline;
+        }
+
+        .list-item {
+            cursor: pointer;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        .list-item:hover {
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .footer {
+            background-color: rgba(24, 42, 75, 0.8); 
+            color: white; 
+            padding: 30px 20px; 
+            position: relative;
+            font-size: 1.2rem; 
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer .footer-left {
+            font-weight: bold;
+        }
+
+        .footer a {
+            color: white; 
+            margin-left: 20px; 
+            text-decoration: none; 
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #ffd700; 
+        }
+        .program-image {
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+        }
+        .box-button {
+    border-radius: 0; 
+    padding: 15px; 
+    text-align: center; 
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black; 
+}
+
+
+.box-button:hover {
+    background-color: rgba(45, 71, 120, 0.8); 
+    color: #fff; 
+}
+    </style>
+    <title>Air University - Single Page</title>
 </head>
 <body>
-  <div id="Admission" class="section " >
-    <h1 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;">Families</h1>
-    <p style="text-align: center; font-size: 30px;font-family: 'Times New Roman', Times, serif;margin-top: 15px; margin-bottom: 40px;" >
-      Families are the foundational building blocks of society, providing love, support, and guidance to their members. They serve as the first social unit where individuals learn values, norms, and cultural traditions.
-     </p>
-    
-      <div class="container">
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <h1 class="navbar-brand">Air University</h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#societal-mission">Societal Mission</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="students.html">Students</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="facultyandstaff.html">Faculty & Staff</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="families.html">Families</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="visitors.html">Visitors</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="alumni.html">Alumni</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <button class="btn btn-secondary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg second-navbar">
+    <div class="container-fluid justify-content-center">
+        <ul class="navbar-nav">
+           
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#parents">Parents Resources</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#events">Events</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#financial">Financial Resouces</a>
+            </li>
+           
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#safety">Safety</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<img src="https://portals.au.edu.pk/ICO/Content/images/banner.jpg" alt="Air University" class="university-image">
+<a href="#societal-mission" class="btn btn-primary btn-lg learn-button" style="padding: 10px 15px; background-color: rgba(24, 42, 75, 0.8); border: none; color: white; margin-top: 0px;">
+    Learn About Our parents Mission
+</a>
+<div class="content">
+    <div id="societal-mission" class="section" style="background-color: white; color: black; padding: 20px;">
+        <h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 46px; margin: 0 0 10px 0;">
+            Parents Mission
+        </h2>
+        <p style="font-size: 25px; line-height: 1.6; margin-top: 16px;">
+          he mission for parents and families connected with Air University often centers around supporting their students’ academic journeys, personal growth, and career development. Parents are encouraged to play an active role in supporting their students' academic goals. This includes motivating them, understanding their academic workload, and helping them balance their studies with personal well-being.
+        </p>
+        <a href="#learn-more" style="background-color: rgba(24, 42, 75, 0.8); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; text-decoration: none;">
+            More About Air
+        </a>
+    </div>
+</div>
+
+
+  
+   
+<div id="parents" class="section" style="background-color: white; color: black;">
+  <h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 46px; margin: 0 0 10px 0;">
+      Parents Resources
+  </h2>
+  <p style="font-size: 25px; line-height: 1.6; margin-top: 16px;">
+    Providing resources for parents on the Air University website can help them feel connected to the university support their students effectively
+  </p>
+  <img src="https://www.cfchildren.org/wp-content/uploads/blog/august-2018/parental-engagement-supports-SEL-1024x536.jpg" alt="Contact Us">
+  
+</div>
+
+
+          
+          
+<div id="events" class="section" style="background-color: white; color: black;">
+    <h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 46px; margin: 0 0 10px 0;">
+         Family Events
+    </h2>
+    <p style="font-size: 25px; line-height: 1.6; margin-top: 16px;">
+        Explore our academic programs and offerings.
+    </p>
+
+    <div class="container">
         <div class="row" style="margin-top: 30px;">
             <div class="col-md-4 mb-4" >
-                <img   src="https://dfc.stthomas.edu/_media-library/_images/about-college/stthomas-dfc-ohana-video.jpg" alt="Academic Program 1" class="img-fluid">
-                <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold" >Family</h5>
+                <img   src="https://wvusstatic.com/www/uploads/Demand-Gen-Summer-web-color-run-boy-D400-1252-1334.jpg" alt="Academic Program 1" class="img-fluid">
+                <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold" >Undergraduate Education</h5>
                 <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">Rich learning experiences that provide a broad liberal arts foundation and deep subject-area expertise</p>
-                <p style="text-align: left;margin-top: 5px;font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Happiness</a></p>
+                <p style="text-align: left;margin-top: 5px;font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Undergraduate Education</a></p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <img  src="https://parade.com/.image/t_share/MTkwNTgwODk4MTY2Mjg2MjA0/summer-activities-jpg.jpg" alt="Academic Program 2" class="img-fluid">
+                <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold">Graduate Education</h5>
+                <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">Unsurpassed opportunities to participate in the advancement of entire fields of knowledge</p>
+                <p style="text-align: left;margin-top: 5px; font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Graduate Education</a></p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <img  src="https://www.terrabellaseniorliving.com/wp-content/uploads/2024/07/Happy-extended-family-having-f-2.jpg" alt="Academic Program 3" class="img-fluid">
+                <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold">Hosting</h5>
+                <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">Continuing adult education, executive and professional programs, and programs for K-12 students</p>
+                <p style="text-align: left;margin-top: 5px; font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" >Capabilities</a></p>
             </div>
            
-        </div>
-        <div style="display: flex; justify-content: center; margin-top: 30px;">
-          <a href="index.html" style="border-radius: 5px; background-color: rgba(24, 42, 75, 0.8); padding: 15px 30px; text-align: center; color: white; font-family: 'Times New Roman', Times, serif; text-decoration: none;">
-              More About families
-          </a>
-      </div>
+</div>  
+</div>
+
+   
+<div id="financial" class="section" style="background-color: white; color: black;">
+  <h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 46px; margin: 0 0 10px 0;">
+      Financial Resources
+  </h2>
+  <p style="font-size: 25px; line-height: 1.6; margin-top: 16px;">
+    Information about financial aid options, scholarships, and how families can support their students’ applications.
+  </p>
+  <img src="https://foodforthepoor.org/wp-content/uploads/shipping0822-helpnow-photo-1.jpg" alt="Contact Us">
   
+</div>
+   
+
+<div id="safety" class="section" style="background-color: white; color: black;">
+  <h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 46px; margin: 0 0 10px 0;">
+      Safety & Security
+  </h2>
+  <p style="font-size: 25px; line-height: 1.6; margin-top: 16px;">
+    Information on campus security services, emergency contacts, and safety policies.
+  </p>
+  <img src="https://www.alten.se/wp-content/uploads/sites/8/2023/06/427_large.jpg" alt="Contact Us">
+  
+</div>
+
+   
+        
+    </div>
+    <div id="learn-more" class="section learn-more-section" style="background-color: white; color: black;">
+        <h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 46px; margin: 0 0 10px 0;">
+            Learn More
+        </h2>
+        <p>Air University (AU) is a prestigious institution located in Islamabad, Pakistan, known for its commitment to academic excellence, research, and professional development. Established in 2002, the university aims to provide a comprehensive education that prepares students for the challenges of the modern world.Engineering: Programs in Electrical, Mechanical, Civil, and Software Engineering.
+            Computer Science: Degrees focusing on Software Development, Data Science, and Cybersecurity.
+            Business Administration: Courses in Management, Finance, Marketing, and Entrepreneurship.
+            Social Sciences: Programs in Psychology, Sociology, and International Relations.
+            Natural Sciences: Degrees in Physics, Mathematics, and Environmental Science.</p>
+            <a href="#societal-mission" style="background-color: rgba(24, 42, 75, 0.8); color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; text-decoration: none;">
+                Learn More
+            </a>
+    </div>
+    <div id="about-us" class="section">
+        <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank" class="icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank" class="icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com" target="_blank" class="icon"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.youtube.com" target="_blank" class="icon"><i class="fab fa-youtube"></i></a>
+        </div>
+        <h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 46px; margin: 0 0 10px 0;">
+            About Us
+        </h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h3 class="hover-effect">Schools</h3>
+                    <ul>
+                        <li class="list-item">School of Engineering</li>
+                        <li class="list-item">School of Business</li>
+                        <li class="list-item">School of Arts</li>
+                        <li class="list-item">School of Health Sciences</li>
+                        <li class="list-item">School of Education</li>
+                        <li class="list-item">School of Social Sciences</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h3 class="hover-effect">Academic</h3>
+                    <ul>
+                        <li class="list-item">Bachelor's Programs</li>
+                        <li class="list-item">Master's Programs</li>
+                        <li class="list-item">PhD Programs</li>
+                        <li class="list-item">Online Courses</li>
+                        <li class="list-item">Continuing Education</li>
+                        <li class="list-item">Internship Opportunities</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h3 class="hover-effect">Health Care</h3>
+                    <ul>
+                        <li class="list-item">Campus Health Services</li>
+                        <li class="list-item">Mental Health Resources</li>
+                        <li class="list-item">Health Education Programs</li>
+                        <li class="list-item">Emergency Services</li>
+                        <li class="list-item">Wellness Workshops</li>
+                        <li class="list-item">Health Insurance Information</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h3 class="hover-effect">About Air</h3>
+                    <ul>
+                        <li class="list-item">History of Air University</li>
+                        <li class="list-item">Mission and Vision</li>
+                        <li class="list-item">Leadership Team</li>
+                        <li class="list-item">Campus Locations</li>
+                        <li class="list-item">Accreditations</li>
+                        <li class="list-item">Community Engagement</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- New Row for Box-Shaped Buttons -->
+            <div class="row">
+                <div class="col-md-2 mb-3">
+                    <a href="#" class="btn btn-primary btn-block box-button">Applying</a>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <a href="#" class="btn btn-primary btn-block box-button">Visiting</a>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <a href="#" class="btn btn-primary btn-block box-button">Giving</a>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <a href="#" class="btn btn-primary btn-block box-button">Careers</a>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <a href="#" class="btn btn-primary btn-block box-button">Faculty Positions</a>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <a href="#" class="btn btn-primary btn-block box-button">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-left">
+                <span>Air University</span>
+            </div>
+            <div class="footer-right">
+                <span>Emergency Number: 123-456-7890</span><br>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+   
+    window.addEventListener('scroll', function() {
+        const secondNavbar = document.querySelector('.second-navbar');
+        const learnButton = document.querySelector('.learn-button');
+        if (window.scrollY > 0) {
+            secondNavbar.classList.add('scrolled');
+            learnButton.classList.add('hidden'); 
+        } else {
+            secondNavbar.classList.remove('scrolled');
+            learnButton.classList.remove('hidden'); 
+        }
+    });
+</script>
 </body>
 </html>
